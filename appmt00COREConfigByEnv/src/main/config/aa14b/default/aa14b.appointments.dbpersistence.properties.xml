@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence combine.id="persistence.driver_manager" 
+			 unitType='DRIVER_MANAGER'>		<!-- The persistence unit to use -->
+	<!--
+	============================================================
+	PERSISTENCE UNIT
+	============================================================ 
+	-->
+	<!-- DriverManager DB connection -->
+	<unit combine.id="unit.driver_manager" 
+		  type='DRIVER_MANAGER'
+		  targetDB='MySQL 8.0'>	<!-- The BBDD spec to use: MySQL 8.0 / Oracle 11.0 -->
+		  
+		<!-- Pool size: See more at: http://www.eclipse.org/eclipselink/documentation/2.5/jpa/extensions/p_connection_pool.htm -->
+		<!-- <connectionPool initial="1" min="16" max="16" /> --> 
+		
+		<connection combine.id="connection.mysql" 
+					vendor='MySQL'>
+			<javax.persistence.jdbc.user>pci</javax.persistence.jdbc.user>
+			<javax.persistence.jdbc.password>pci</javax.persistence.jdbc.password>
+			<javax.persistence.jdbc.driver>com.mysql.cj.jdbc.Driver</javax.persistence.jdbc.driver>
+			<javax.persistence.jdbc.url><![CDATA[jdbc:mysql://localhost:3600/pci?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC]]></javax.persistence.jdbc.url>
+		</connection>
+	</unit>
+	
+	<!--
+	============================================================
+	SCHEMA GENERATION
+	============================================================ 
+	-->
+	<schema>
+		<generationMode>CREATE_OR_EXTEND_TABLES</generationMode>	<!-- NONE / DROP_AND_CREATE_TABLES / CREATE_OR_EXTEND_TABLES / DROP_TABLES / CREATE_TABLES -->
+												<!-- to manually delete the tables in mysql use:
+															SET autocommit=0; 
+																		SET unique_checks=0; 
+																		SET foreign_key_checks=0;
+																  before the drop table statements in order to tell mysql not to check the foreign key constraints -->
+	</schema>
+	<!--
+	==========================================================================
+	DEBUG: true = FINEST / false = INFO
+		   OFF / SEVERE / WARNING / INFO / CONFIG / FINE/ FINER / FINEST / ALL
+	========================================================================== 
+	-->
+	<debugSQL>OFF</debugSQL>	<!-- trace of the jpa issued sql -->
+</persistence>
