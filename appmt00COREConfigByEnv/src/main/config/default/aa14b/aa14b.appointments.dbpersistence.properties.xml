@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence combine.id="persistence.driver_manager" 
-			 unitType='DRIVER_MANAGER'>		<!-- The persistence unit to use -->
+<persistence unitType='DRIVER_MANAGER'>
 	<!--
 	============================================================
 	PERSISTENCE UNIT
 	============================================================ 
 	-->
-	<!-- DriverManager DB connection -->
-	<unit combine.id="unit.driver_manager" 
-		  type='DRIVER_MANAGER'
-		  targetDB='MySQL 8.0'>	<!-- The BBDD spec to use: MySQL 8.0 / Oracle 11.0 -->
+	<!-- DriverManager DB connection: targetDB=MySQL 8.0 / Oracle 11.0 -->
+	<unit type='DRIVER_MANAGER'
+		  targetDB='MySQL 8.0'>
 		  
 		<!-- Pool size: See more at: http://www.eclipse.org/eclipselink/documentation/2.5/jpa/extensions/p_connection_pool.htm -->
 		<!-- <connectionPool initial="1" min="16" max="16" /> --> 
 		
-		<connection combine.id="connection.mysql" 
-					vendor='MySQL'>
+		<connection vendor='MySQL'>
 			<javax.persistence.jdbc.user>pci</javax.persistence.jdbc.user>
 			<javax.persistence.jdbc.password>pci</javax.persistence.jdbc.password>
 			<javax.persistence.jdbc.driver>com.mysql.cj.jdbc.Driver</javax.persistence.jdbc.driver>
-			<javax.persistence.jdbc.url><![CDATA[jdbc:mysql://localhost:3600/pci?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC]]></javax.persistence.jdbc.url>
+			<javax.persistence.jdbc.url><![CDATA[jdbc:mysql://localhost:3306/pci?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC]]></javax.persistence.jdbc.url>
 		</connection>
+		<properties>
+		</properties>
 	</unit>
 	
 	<!--
