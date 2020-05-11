@@ -19,15 +19,6 @@
 		</scheduler>
 	</remindScheduler>
 	
-	
-	<!-- Proxy settings (needed for Google & Twilio REST APIs) -->
-	<proxy enabled='true'>
-		<host>[PROXY_HOST]</host>
-		<user>[PROXY_USER]</user>
-		<password>[PROXY_PASSWORD]</password>
-	</proxy>
-	
-	
 
 	<!-- ============================================= -->
 	<!-- Proxy (needed for Google & Twilio REST APIs)  -->
@@ -44,13 +35,13 @@
 	<!-- ============================================= -->
 	<email>
 		<smtp>
-			<host>PROXY2</host>
+			<host>{smtp server}</host>
 		</smtp>
 		<aws>
 			<!-- simple email service -->
 			<ses>
-				<accessKey>AKIASOHENLOJVWXXGTH2</accessKey>
-				<accessSecret>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</accessSecret>
+				<accessKey>{aws-ses-access-key}</accessKey>
+				<accessSecret>{aws-ses-access-secret}</accessSecret>
 			</ses>
 		</aws>
 		<google>
@@ -70,10 +61,10 @@
 	 				9.- To grant your app full access to gmail, at the [API Scopes] text box enter: https://mail.google.com, https://www.googleapis.com/auth/gmail.compose, https://www.googleapis.com/auth/gmail.modify, https://www.googleapis.com/auth/gmail.readonly
 	 					(it's very important that you enter ALL the scopes)
 				-->
-				<serviceAccountClientID>327116756300-thcjqf1mvrn0geefnu6ef3pe2sm61i2q.apps.googleusercontent.com</serviceAccountClientID>
-				<serviceAccountEmailAddress>327116756300-thcjqf1mvrn0geefnu6ef3pe2sm61i2q@developer.gserviceaccount.com</serviceAccountEmailAddress>
-				<p12Key loadedUsing='classPath'>x47b/notifier/googleServiceAccount.p12</p12Key>	<!-- change to fileSystem if the p12 file is found at the fileSystem -->
-				<googleAppsUser>admin@futuretelematics.net</googleAppsUser>
+				<serviceAccountClientID>{google-service-account-client-id}</serviceAccountClientID>
+				<serviceAccountEmailAddress>{google-service-account-email}</serviceAccountEmailAddress>
+				<p12Key loadedUsing='classPath'>{p12-key-path}</p12Key>	<!-- change to fileSystem if the p12 file is found at the fileSystem -->
+				<googleAppsUser>{google-app-user}</googleAppsUser>
 			</api>
 			<!-- DEPRECATED -->
 			<smtp>
@@ -84,8 +75,8 @@
 					3.- Select [Other(custom name)] and give it a name (ie X47B)
 					4.- Copy the generated password and put it here
 				-->
-				<user>futuretelematics</user>
-				<password>--not enabled--</password>
+				<user>{user}</user>
+				<password>{password}</password>
 			</smtp>
 		</google>
 		<restService>
@@ -102,14 +93,14 @@
 			<wsURL>http://svc.extra.integracion.jakina.ejiedes.net/ctxapp/W91dSendSms?WSDL</wsURL>
 			<authentication>
 			  <enterprise>
-			    		<login>INNOVUS</login>
-			    		<user>innovus.superusuario</user>
-			    		<password>MARKSTAT</password>
+			    		<login>{login}</login>
+			    		<user>{user}</user>
+			    		<password>{password}</password>
 			  </enterprise>
 			  <clientApp>
-			    		<productId>X47B</productId>
-			    		<contractId>2066</contractId>
-			    		<password>X47B</password>
+			    		<productId>{productId}</productId>
+			    		<contractId>{contractId}</contractId>
+			    		<password>{password}</password>
 			  </clientApp>
 			</authentication>
 		</latinia>
@@ -118,8 +109,8 @@
 		<aws>
 			<!-- simple email service -->
 			<sns>
-				<accessKey>AKIASOHENLOJY4BEDCMO</accessKey>
-				<accessSecret>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</accessSecret>
+				<accessKey>{aws-sns-access-key}</accessKey>
+				<accessSecret>{aws-sns-access-secret}</accessSecret>
 			</sns>
 		</aws>
 	</sms>
@@ -130,10 +121,10 @@
 	<voice>
 		<!-- Twilio notifier -->
 		<twilio>
-			<accountSID>ACaea0070ca343860bc94a5e746f3593d2</accountSID>
-			<authToken>c593c784767200206c39bd7614d227bc</authToken>
-			<voicePhoneNumber>+34518880365</voicePhoneNumber>
-			<!-- <messagingPhoneNumber>+34518880365</messagingPhoneNumber> -->	<!-- no messaging phone number available -->
+			<accountSID>{twilio-account-sid}</accountSID>
+			<authToken>{twilio-account-token}</authToken>
+			<voicePhoneNumber>{twilio-voice-phone-number}</voicePhoneNumber>
+			<!-- <messagingPhoneNumber>{twilio-messaging-phone-number}</messagingPhoneNumber> -->	<!-- no messaging phone number available -->
 		</twilio>
 	</voice>
 
@@ -142,8 +133,7 @@
 	<!-- ============================================= -->
 	<push>
 		<firebase>
-			<!-- <credentials>META-INF/pb01panicbutton-credentials.json</credentials> -->
-			<credentials>pb01c/components/notifier/firebase/pb01panicbutton-credentials.json</credentials>
+			<credentials>{firebase-credentials-json-path}</credentials>
 		</firebase>
 	</push>
 </notifier>
