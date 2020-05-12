@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notifier>
+	<!-- ============================================= -->
+	<!-- SCHEDULER CONFIG                              -->
+	<!-- ============================================= -->
+	<remindScheduler>
+		<!-- scheduler -->
+		<scheduler id='aa14.reminder' 
+				   enabled='false'>
+			<!-- quartz properties (see AB72RenderSchedulerConfig) -->
+			<quartz>	
+				<!-- Configure Datasources  -->
+				<!-- MySQL -->
+				<org.quartz.dataSource.mySQLds.driver>com.mysql.cj.jdbc.Driver</org.quartz.dataSource.mySQLds.driver>
+				<org.quartz.dataSource.mySQLds.URL><![CDATA[jdbc:mysql://localhost:3600/pci?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC]]></org.quartz.dataSource.mySQLds.URL> 
+				<org.quartz.dataSource.mySQLds.user>pci</org.quartz.dataSource.mySQLds.user>
+				<org.quartz.dataSource.mySQLds.password>pco</org.quartz.dataSource.mySQLds.password>
+			</quartz>
+		</scheduler>
+	</remindScheduler>
+	
+
+	<!-- ============================================= -->
+	<!-- Proxy (needed for Google & Twilio REST APIs)  -->
+	<!-- ============================================= -->
+	<!-- Proxy settings (needed for Google & Twilio REST APIs) -->
+	<proxy enabled='false'>
+		<host></host>
+		<user></user>
+		<password></password>
+	</proxy>
+
+	<!-- ============================================= -->
+	<!-- EMAIL NOTIFIER                                -->
+	<!-- ============================================= -->
+	<email>
+		<smtp>
+			<host>{smtp server}</host>
+		</smtp>
+		<aws>
+			<!-- simple email service -->
+			<ses>
+				<accessKey>{aws-ses-access-key}</accessKey>
+				<accessSecret>{aws-ses-access-secret}</accessSecret>
+			</ses>
+		</aws>
+		<google>
+			<api>
+				<!--
+				 A google API [Service Account] is used in order to avoid end-user interaction (server-to-server)
+	 			 To set-up a [Service Account] client ID: (see http://stackoverflow.com/questions/29327846/gmail-rest-api-400-bad-request-failed-precondition/29328258#29328258)
+	 				1.- Using a google apps user open the developer console
+	 				2.- Create a new project (ie MyProject)
+	 				3.- Go to [Apis & auth] > [Credentials] and create a new [Service Account] client ID
+	 				4.- Copy the [service account]'s [Client ID] (the one like xxx.apps.googleusercontent.com) for later use
+	 				5.- Now you have to Delegate domain-wide authority to the service account in order to authorize your appl to access user data on behalf of users in the Google Apps domain
+	 				    ... so go to your google apps domain admin console
+					6.- Go to the [Security] section and find the [Advanced Settings] (it might be hidden so you'd have to click [Show more..])
+	 				7.- Click con [Manage API Client Access]
+	 				8.- Paste the [Client ID] you previously copied at [4] into the [Client Name] text box.
+	 				9.- To grant your app full access to gmail, at the [API Scopes] text box enter: https://mail.google.com, https://www.googleapis.com/auth/gmail.compose, https://www.googleapis.com/auth/gmail.modify, https://www.googleapis.com/auth/gmail.readonly
+	 					(it's very important that you enter ALL the scopes)
+				-->
+				<serviceAccountClientID>{google-service-account-client-id}</serviceAccountClientID>
+				<serviceAccountEmailAddress>{google-service-account-email}</serviceAccountEmailAddress>
+				<p12Key loadedUsing='classPath'>{p12-key-path}</p12Key>	<!-- change to fileSystem if the p12 file is found at the fileSystem -->
+				<googleAppsUser>{google-app-user}</googleAppsUser>
+			</api>
+			<!-- DEPRECATED (do NOT use) -->
+			<smtp>
+				<!--
+				How to create an app password:
+					1.- Login to the account settings: https://myaccount.google.com/
+					2.- Find the [Signing in] section and click on [App passwords]
+					3.- Select [Other(custom name)] and give it a name (ie X47B)
+					4.- Copy the generated password and put it here
+				-->
+				<user>{user}</user>
+				<password>{password}</password> 
+			</smtp>
+		</google>
+		<restService>
+			<url>the rest service url</url>
+		</restService>
+	</email>
+
+	<!-- ============================================= -->
+	<!-- EMAIL NOTIFIER                                -->
+	<!-- ============================================= -->
+	<sms>
+		<!-- LATINIA Notifier -->
+		<latinia>
+			<wsURL>http://svc.extra.integracion.jakina.ejiedes.net/ctxapp/W91dSendSms?WSDL</wsURL>
+			<authentication>
+			  <enterprise>
+			    		<login>{login}</login>
+			    		<user>{user}</user>
+			    		<password>{password}</password>
+			  </enterprise>
+			  <clientApp>
+			    		<productId>{productId}</productId>
+			    		<contractId>{contractId}</contractId>
+			    		<password>{password}</password>
+			  </clientApp>
+			</authentication>
+		</latinia>
+
+		<!-- AWS SNS (simple notification service) -->
+		<aws>
+			<!-- simple email service -->
+			<sns>
+				<accessKey>{aws-sns-access-key}</accessKey>
+				<accessSecret>{aws-sns-access-secret}</accessSecret>
+			</sns>
+		</aws>
+	</sms>
+
+	<!-- ============================================= -->
+	<!-- VOICE NOTIFIER                                -->
+	<!-- ============================================= -->
+	<voice>
+		<!-- Twilio notifier -->
+		<twilio>
+			<accountSID>{twilio-account-sid}</accountSID>
+			<authToken>{twilio-account-token}</authToken>
+			<voicePhoneNumber>{twilio-voice-phone-number}</voicePhoneNumber>
+			<!-- <messagingPhoneNumber>{twilio-messaging-phone-number}</messagingPhoneNumber> -->	<!-- no messaging phone number available -->
+		</twilio>
+	</voice>
+
+	<!-- ============================================= -->
+	<!-- PUSH MESSAGE NOTIFIER                         -->
+	<!-- ============================================= -->
+	<push>
+		<firebase>
+			<credentials>{firebase-credentials-json-path}</credentials>
+		</firebase>
+	</push>
+</notifier>
