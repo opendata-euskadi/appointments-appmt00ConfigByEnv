@@ -66,7 +66,11 @@
 				<p12Key loadedUsing='classPath'>{p12-key-path}</p12Key>	<!-- change to fileSystem if the p12 file is found at the fileSystem -->
 				<googleAppsUser>{google-app-user}</googleAppsUser>
 			</api>
+<<<<<<< HEAD
 			<!-- DEPRECATED (do NOT use) -->  
+=======
+			<!-- DEPRECATED (do NOT use) -->
+>>>>>>> branch 'github' of https://src1.alm02.itbatera.euskadi.eus/zuzenean/tools/appmt00configbyenv.git
 			<smtp>
 				<!--
 				How to create an app password:

@@ -24,7 +24,11 @@
 	============================================================
 	SCHEMA GENERATION
 	============================================================ 
+<<<<<<< HEAD
 	--> 
+=======
+	-->
+>>>>>>> branch 'github' of https://src1.alm02.itbatera.euskadi.eus/zuzenean/tools/appmt00configbyenv.git
 	<schema>
 		<generationMode>CREATE_OR_EXTEND_TABLES</generationMode>	<!-- NONE / DROP_AND_CREATE_TABLES / CREATE_OR_EXTEND_TABLES / DROP_TABLES / CREATE_TABLES -->
 												<!-- to manually delete the tables in mysql use:
