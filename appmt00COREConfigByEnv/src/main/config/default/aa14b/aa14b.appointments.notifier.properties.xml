@@ -76,7 +76,7 @@
 					4.- Copy the generated password and put it here
 				-->
 				<user>{user}</user>
-				<password>{password}</password>
+				<password>{password}</password> 
 			</smtp>
 		</google>
 		<restService>
